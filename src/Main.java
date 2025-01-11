@@ -1,28 +1,24 @@
-
-/**
- * Purpose: Orchestrates the application by combining all components.
- * Description: This class manages user interaction and integrates all
- *              other classes for the routing application.
- */
 import java.util.*;
 
 public class Main {
     public static void main(String[] args) {
-        // Create a graph using the InputOutput helper class
-        Graph graph = InputOutput.createGraph();
-        Scanner scanner = new Scanner(System.in);
+        Graph graph = new Graph();
 
-        // Get user input for start and destination
-        System.out.print("Enter start location: ");
-        String start = scanner.nextLine();
+        // Add cities (nodes)
+        graph.addVertex("Nairobi");
+        graph.addVertex("Mombasa");
+        graph.addVertex("Kisumu");
+        graph.addVertex("Eldoret");
 
-        System.out.print("Enter destination: ");
-        String destination = scanner.nextLine();
+        // Add roads (edges) with weights (distances)
+        graph.addEdge("Nairobi", "Mombasa", 500);
+        graph.addEdge("Nairobi", "Kisumu", 300);
+        graph.addEdge("Mombasa", "Eldoret", 350);
+        graph.addEdge("Kisumu", "Eldoret", 200);
+        graph.addEdge("Mombasa", "Kisumu", 400);
 
-        // Find the shortest path using Dijkstra's algorithm
-        List<String> path = Dijkstra.findShortestPath(graph, start, destination);
-
-        // Display the result path
-        InputOutput.displayPath(path);
+        // Find shortest path from Nairobi to Kisumu
+        String path = Dijkstra.findShortestPath(graph, "Nairobi", "Kisumu");
+        System.out.println("Shortest path from Nairobi to Kisumu: " + path);
     }
 }

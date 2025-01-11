@@ -1,6 +1,5 @@
 
 /**
- * Author: kositany ck
  * Purpose: Orchestrates the application by combining all components.
  * Description: This class manages user interaction and integrates all
  *              other classes for the routing application.

@@ -17,8 +17,12 @@ public class PriorityQueue<T> {
             throw new NoSuchElementException("Priority queue is empty");
         }
         T result = heap.get(0).value;
-        heap.set(0, heap.remove(heap.size() - 1));
-        bubbleDown(0);
+        if (heap.size() > 1) {
+            heap.set(0, heap.remove(heap.size() - 1));
+            bubbleDown(0);
+        } else {
+            heap.remove(0);
+        }
         return result;
     }
 

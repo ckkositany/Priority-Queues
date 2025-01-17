@@ -1,28 +1,30 @@
-
-/**
- * Purpose: Orchestrates the application by combining all components.
- * Description: This class manages user interaction and integrates all
- *              other classes for the routing application.
- */
-import java.util.*;
+import java.util.Map;
+import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        // Create a graph using the InputOutput helper class
-        Graph graph = InputOutput.createGraph();
         Scanner scanner = new Scanner(System.in);
 
-        // Get user input for start and destination
-        System.out.print("Enter start location: ");
-        String start = scanner.nextLine();
+        // Example graph initialization
+        Graph graph = new Graph();
+        graph.addEdge("A", "B", 5);
+        graph.addEdge("A", "C", 10);
+        graph.addEdge("B", "C", 2);
+        graph.addEdge("B", "D", 4);
+        graph.addEdge("C", "D", 1);
 
-        System.out.print("Enter destination: ");
-        String destination = scanner.nextLine();
+        System.out.println("Enter start location: ");
+        String startLocation = scanner.nextLine();
 
-        // Find the shortest path using Dijkstra's algorithm
-        List<String> path = Dijkstra.findShortestPath(graph, start, destination);
+        // Calculate shortest paths
+        Map<String, Integer> shortestPaths = Dijkstra.calculateShortestPath(graph, startLocation);
 
-        // Display the result path
-        InputOutput.displayPath(path);
+        // Display the results
+        System.out.println("Shortest paths from " + startLocation + ":");
+        for (Map.Entry<String, Integer> entry : shortestPaths.entrySet()) {
+            System.out.println("To " + entry.getKey() + ": " + entry.getValue());
+        }
+
+        scanner.close();
     }
 }
